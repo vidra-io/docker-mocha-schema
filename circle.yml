@@ -1,0 +1,23 @@
+machine:
+  services:
+    - docker
+
+test:
+  override:
+    - echo "todo"
+
+deployment:
+  release:
+    tag: /^[0-9.]+$/
+    owner: vidra-io
+    commands:
+      - docker build -t vidra/mocha-schema:$CIRCLE_TAG .
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push vidra/mocha-schema:$CIRCLE_TAG
+  main_branches:
+    branch: /^(master|develop)$/
+    owner: vidra-io
+    commands:
+      - docker build -t vidra/mocha-schema:$CIRCLE_BRANCH .
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push vidra/mocha-schema:$CIRCLE_BRANCH
