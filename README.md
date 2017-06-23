@@ -11,4 +11,4 @@ A Docker image with these libraries globally available:
 
 From a directory with some mocha/chakram tests:
 
-`docker run -i -t -v `pwd`:/tmp/src vidra-io/mocha-schema`
+    docker run -i -t -v `pwd`:/tmp/src vidra-io/mocha-schema
